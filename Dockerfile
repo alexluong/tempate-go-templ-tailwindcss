@@ -24,12 +24,9 @@ COPY --from=templ /app /app
 COPY --from=assets /app/dist /app/web/dist
 WORKDIR /app
 RUN go build -o /app/main cmd/main/main.go
-EXPOSE 8090
-USER nonroot:nonroot
-ENTRYPOINT ["/main"]
 
 # Deploy
-FROM alpine
+FROM scratch
 WORKDIR /
 COPY --from=build /app/main /main
 EXPOSE 8080
