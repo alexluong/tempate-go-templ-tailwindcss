@@ -7,6 +7,8 @@ import (
 	"net"
 	"net/http"
 	"os"
+
+	template "github.com/alexluong/template-go-templ-tailwindcss/web/template"
 )
 
 type ServerConfig struct {
@@ -32,7 +34,7 @@ func newServer() *http.ServeMux {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello, world!")
+		template.HelloWorld().Render(r.Context(), w)
 	})
 
 	return mux
