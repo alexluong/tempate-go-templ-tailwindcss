@@ -13,12 +13,13 @@ import (
 )
 
 type ServerConfig struct {
-	Host string
-	Port string
+	Host      string
+	Port      string
+	DistEmbed bool
 }
 
 func Run(ctx context.Context, config *ServerConfig) error {
-	srv := newServer()
+	srv := newServer(config.DistEmbed)
 	httpServer := &http.Server{
 		Addr:    net.JoinHostPort(config.Host, config.Port),
 		Handler: srv,
@@ -31,11 +32,15 @@ func Run(ctx context.Context, config *ServerConfig) error {
 	return nil
 }
 
-func newServer() *http.ServeMux {
+func newServer(distEmbed bool) *http.ServeMux {
 	mux := http.NewServeMux()
 
-	distServer := http.FileServer(web.DistDirFS)
-	mux.Handle("GET /dist/", distServer)
+	if distEmbed {
+		distServer := http.FileServer(web.DistDirFS)
+		mux.Handle("GET /dist/", distServer)
+	} else {
+		mux.Handle("GET /dist/", http.StripPrefix("/dist/", http.FileServer(http.Dir("web/dist"))))
+	}
 
 	mux.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
 		template.HelloWorld().Render(r.Context(), w)

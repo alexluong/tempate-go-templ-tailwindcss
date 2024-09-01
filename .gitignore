@@ -1,4 +1,6 @@
 *_templ.go
+*_templ.txt
 node_modules
 web/dist/*
 !web/dist/.gitkeep
+tmp
