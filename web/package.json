@@ -1,0 +1,9 @@
+{
+  "name": "web",
+  "scripts": {
+    "build:css": "tailwindcss build -i src/css/styles.css -o dist/css/styles.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.10"
+  }
+}

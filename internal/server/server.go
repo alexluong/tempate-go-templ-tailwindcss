@@ -8,7 +8,8 @@ import (
 	"net/http"
 	"os"
 
-	template "github.com/alexluong/template-go-templ-tailwindcss/web/template"
+	"github.com/alexluong/template-go-templ-tailwindcss/web"
+	"github.com/alexluong/template-go-templ-tailwindcss/web/template"
 )
 
 type ServerConfig struct {
@@ -32,6 +33,9 @@ func Run(ctx context.Context, config *ServerConfig) error {
 
 func newServer() *http.ServeMux {
 	mux := http.NewServeMux()
+
+	distServer := http.FileServer(web.DistDirFS)
+	mux.Handle("GET /dist/", distServer)
 
 	mux.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
 		template.HelloWorld().Render(r.Context(), w)
