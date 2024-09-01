@@ -2,6 +2,7 @@
   "name": "web",
   "scripts": {
     "dev:css": "tailwindcss build -i src/css/styles.css -o dist/css/styles.css --watch",
+    "build": "npm run build:css",
     "build:css": "tailwindcss build -i src/css/styles.css -o dist/css/styles.css --minify"
   },
   "devDependencies": {

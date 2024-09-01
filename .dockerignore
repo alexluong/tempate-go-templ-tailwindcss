@@ -1,0 +1,5 @@
+web/node_modules
+web/dist
+tmp
+**/*_templ.go
+**/*_templ.txt

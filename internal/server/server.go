@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"net"
 	"net/http"
 	"os"
 
@@ -13,15 +12,14 @@ import (
 )
 
 type ServerConfig struct {
-	Host      string
-	Port      string
+	Port      int
 	DistEmbed bool
 }
 
 func Run(ctx context.Context, config *ServerConfig) error {
 	srv := newServer(config.DistEmbed)
 	httpServer := &http.Server{
-		Addr:    net.JoinHostPort(config.Host, config.Port),
+		Addr:    fmt.Sprintf(":%d", config.Port),
 		Handler: srv,
 	}
 	log.Printf("listening on %s\n", httpServer.Addr)

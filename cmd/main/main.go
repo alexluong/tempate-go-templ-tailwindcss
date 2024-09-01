@@ -23,8 +23,7 @@ func run(
 	getenv func(string) string,
 ) error {
 	return server.Run(ctx, &server.ServerConfig{
-		Host:      "localhost",
-		Port:      "8090",
+		Port:      8090,
 		DistEmbed: !isDevelopment(args, getenv),
 	})
 }
