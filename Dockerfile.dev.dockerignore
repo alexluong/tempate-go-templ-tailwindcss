@@ -1,0 +1,6 @@
+.git
+tmp
+web/node_modules
+# web/dist
+# **/*_templ.go
+# **/*_templ.txt
