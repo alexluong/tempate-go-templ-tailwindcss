@@ -8,7 +8,7 @@ dev/server:
 	air
 
 dev/server_docker:
-	docker-compose -f compose.dev.yml up --watch
+	docker-compose up --watch
 
 dev/templ:
 	templ generate --watch --open-browser=false

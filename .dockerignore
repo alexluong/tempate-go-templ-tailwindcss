@@ -1,0 +1,9 @@
+.git
+tmp
+web/node_modules
+
+# include these so Docker Compose can watch them
+# they will be overwritten during the build process anyway
+# web/dist
+# **/*_templ.go
+# **/*_templ.txt
